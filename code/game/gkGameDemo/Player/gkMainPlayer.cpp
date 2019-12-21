@@ -38,18 +38,21 @@ bool gkMainPlayer::Init(const Quat& camrot)
 		if (m_pPlayer)
 		{
 			IGameObjectRenderLayer* pRenderLayer = m_pPlayer->getRenderLayer();
-			pRenderLayer->setMaterialName(_T("objects/characters/prophet/prophet.mtl"));
+            if(pRenderLayer)
+			    pRenderLayer->setMaterialName(_T("objects/characters/prophet/prophet.mtl"));
 
 
 
 			m_pPlayerAnim = reinterpret_cast<IGameObjectAnimLayer*>(m_pPlayer->getGameObjectLayer(eGL_AnimLayer));
-			m_pPlayerAnim->playAnimation(_T("idle"), 1.0f);
+            if(m_pPlayerAnim)
+			    m_pPlayerAnim->playAnimation(_T("idle"), 1.0f);
 
 			// Create Physic Layer By hand
 			m_pPlayerPhysic = gEnv->pPhysics->CreatePhysicLayer();
 			m_pPlayer->setGameObjectLayer( m_pPlayerPhysic );
 
-			m_pPlayerPhysic->createCharacterController();
+            if(m_pPlayerPhysic)
+			    m_pPlayerPhysic->createCharacterController();
 
 			m_pPlayer->setPosition(0,0,10);
 			m_pPlayer->setScale(1,1,1);

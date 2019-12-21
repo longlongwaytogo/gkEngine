@@ -48,10 +48,10 @@ public:
 	CPopGameModeBase(void);
 	~CPopGameModeBase(void);
 
-	virtual void FadeIn();
-	virtual void UpdateLogic();
-	virtual void RenderHud();
-	virtual void FadeOut();
+	virtual void FadeIn() = 0;
+	virtual void UpdateLogic() = 0;
+	virtual void RenderHud() = 0;
+	virtual void FadeOut() = 0;
 };
 
 

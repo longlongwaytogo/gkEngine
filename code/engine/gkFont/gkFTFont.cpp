@@ -11,6 +11,39 @@
 #define table_texture_width_f 1024.f
 #define table_texture_width_str "1024"
 
+
+/*
+ * 当libjpeg-turbo为vs2010编译时，vs2015下静态链接libjpeg-turbo会链接出错:找不到__iob_func,
+ * 增加__iob_func到__acrt_iob_func的转换函数解决此问题,
+ * 当libjpeg-turbo用vs2015编译时，不需要此补丁文件
+ */
+
+
+#pragma comment(lib, "msvcrtd.lib") 
+//#pragma comment(lib, "vcruntimed.lib") 
+//#pragma comment(lib, "ucrtd.lib")
+
+//#ifdef __cplusplus 
+//extern "C" 
+//{
+//
+//FILE* __cdecl __acrt_iob_func(unsigned i) { 
+//        return &(__iob_func()[i]);
+//
+//}
+//
+// int __cdecl stdio_common_vfprintf( char * _DstBuf, _In_ size_t _MaxCount, _In_z_ _Printf_format_string_ const char * _Format, _In_opt_ _locale_t _Locale, va_list _ArgList)
+// {
+//	 return 0;
+// }
+//
+//
+//}
+//
+//#endif 
+
+// 出现无法编译主要是需要freetype 也许要使用相同的编译器进行而次编译 
+
 gkFTFont::gkFTFont(void)
 {
 	m_face = NULL;

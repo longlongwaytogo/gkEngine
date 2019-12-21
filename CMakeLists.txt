@@ -65,8 +65,12 @@ target_link_libraries(gkFont
     ${PROJECT_SOURCE_DIR}/code/ThirdParty/freetype/lib/ios/Release-OSX/libfreetype2.a
 )
 else()
-target_link_libraries(gkFont 
-    ${PROJECT_SOURCE_DIR}/code/ThirdParty/freetype/lib/freetype_x64release.lib
+#target_link_libraries(gkFont 
+#    ${PROJECT_SOURCE_DIR}/code/ThirdParty/freetype/lib/freetype_x64release.lib
+	target_link_libraries(gkFont  optimized  ${PROJECT_SOURCE_DIR}/code/ThirdParty/freetype/lib/freetype_x64release.lib)
+	target_link_libraries(gkFont  debug  ${PROJECT_SOURCE_DIR}/code/ThirdParty/freetype/lib/freetype_x64debug.lib
+ 
+
 )
 endif()
 set (EXTRA_LIBS ${EXTRA_LIBS} gkFont)
@@ -99,12 +103,35 @@ if (APPLE)
 else()
     add_library(gkInput ${CoreLinkType} ${sources})
 endif()
-
 target_include_directories(gkInput PRIVATE
     ./code/engine/gkInput/
     ./code/engine/gkInput/include/
     ./code/ThirdParty/DXSDK/include/
 )
+
+# gkGameDemo
+FILE(GLOB sources ./code/game/gkGameDemo/source/*.*  ./code/game/gkGameDemo/Player/*.*   ./code/game/gkGameDemo/include/*.*)
+if (APPLE)
+  
+else()
+	 
+    add_library(gkGameDemo ${CoreLinkType} ${sources})
+	target_include_directories(gkGameDemo PRIVATE
+		./code/game/gkGameDemo ./code/game/gkGameDemo/include)
+		 target_compile_definitions(gkGameDemo PRIVATE -DGKGAMEDEMO_EXPORTS)
+endif()
+
+# PopGame
+FILE(GLOB sources ./code/game/PopGame/*.cpp )
+add_library(PopGame ${CoreLinkType} ${sources})
+
+	
+# gkTrackBus
+#FILE(GLOB sources ./code/engine/gkTrackBus/*.* )
+#add_library(gkTrackBus ${CoreLinkType} ${sources})
+
+
+
 
 if (APPLE)
 

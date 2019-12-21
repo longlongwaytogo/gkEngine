@@ -953,6 +953,7 @@ bool gkSystem::LoadScene( const TCHAR* filename )
 		// should move down to new module
 		// test for scene resource loading
 		gkSceneBuilder::buildSceneFromFile(_T("engine/assets/skybox_sphere.gks"), false, true, Vec3(0,0,0), RENDER_LAYER_SKIES_EARLY, true);
+       // gkSceneBuilder::buildSceneFromFile(_T("level/conf_room/conf_room.gks"), false, true, Vec3(0,0,0), RENDER_LAYER_SKIES_EARLY, true);
 	}
 
 	// param2: syncmode
